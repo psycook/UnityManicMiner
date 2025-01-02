@@ -4,12 +4,13 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Background
-  - Dealdy
   - Collectable
-  - Conveyor Left
-  - Conveyor Right
   - Quicksand
+  - Deadly
+  - Ground
+  - Wall
+  - ConveyorRight
+  - ConveyorLeft
   layers:
   - Default
   - TransparentFX
@@ -18,12 +19,12 @@ TagManager:
   - Water
   - UI
   - Player
-  - Platform
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - Collectable
+  - Deadly
+  - Wall
+  - Conveyor
+  - Quicksand
   - 
   - 
   - 

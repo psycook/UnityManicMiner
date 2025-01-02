@@ -34,7 +34,7 @@ public class AirMeterBehaviour : MonoBehaviour
         // Optional: Handle what happens when air runs out
         if (currentAir <= 0)
         {
-            Debug.Log("Out of air!");
+            //.Log("Out of air!");
             // Trigger level failure or other logic here
         }
     }
