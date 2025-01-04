@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 enum ConveyorState { None, Left, Right }
 
@@ -10,6 +11,8 @@ public class MinerWillyBehaviour : MonoBehaviour
     private float moveSpeed = 0.5f;
     [SerializeField]
     private float jumpForce = 1f;
+    [SerializeField]
+    private float fallForce = 1f;
     [SerializeField]
     private Collider2D groundCollider;
     [SerializeField]
@@ -65,7 +68,9 @@ public class MinerWillyBehaviour : MonoBehaviour
     {
         if (isFalling)
         {
-            rb.linearVelocity = new Vector2(0.0f, -jumpForce);
+            groundCollider.enabled = true;
+            groundCheckCollider.enabled = true;
+            rb.linearVelocity = new Vector2(0.0f, -fallForce);
             return;
         }
 
@@ -187,15 +192,26 @@ public class MinerWillyBehaviour : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log($"Collision with {collision.gameObject.tag}, jumping state is {isJumping}");
+
+        if (isJumping)
+        {
+            Debug.Log("Setting to falling");
+            setIsFalling(true);
+            setIsJumping(false);
+        }
+    }
+
     private void setIsGrounded(bool grounded)
     {
         isGrounded = grounded;
-        animator.SetBool("isJumping", false);
-        animator.SetBool("isFalling", false);
     }
 
     private void setIsJumping(bool jumping)
     {
+        Debug.Log($"Setting isJumping to {jumping}");
         isJumping = jumping;
         animator.SetBool("isJumping", isJumping);
     }

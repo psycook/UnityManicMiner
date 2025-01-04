@@ -109,20 +109,20 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   m_LayerOverridePriority: 100
   m_ForceSendLayers:
     serializedVersion: 2
-    m_Bits: 7936
+    m_Bits: 1792
   m_ForceReceiveLayers:
     serializedVersion: 2
-    m_Bits: 7936
+    m_Bits: 1792
   m_ContactCaptureLayers:
     serializedVersion: 2
-    m_Bits: 7936
+    m_Bits: 1792
   m_CallbackLayers:
     serializedVersion: 2
-    m_Bits: 7936
+    m_Bits: 1792
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
@@ -272,6 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   jumpForce: 22
+  fallForce: 15
   groundCollider: {fileID: 2476981667047796450}
   groundCheckCollider: {fileID: 7664646829712468086}
   isGrounded: 0
