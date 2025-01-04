@@ -15,7 +15,6 @@ enum EnemyMovementDirection
     Down
 }
 
-
 public class EnemyBahaviour : MonoBehaviour
 {
     [SerializeField] private EnemyMovementAxis axis = EnemyMovementAxis.Horizontal;
@@ -31,6 +30,9 @@ public class EnemyBahaviour : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
 
+
+    public delegate void OnDeath();
+    public static event OnDeath death;
 
     void Start()
     {
@@ -49,7 +51,6 @@ public class EnemyBahaviour : MonoBehaviour
         }
     }
 
-
     void Update()
     {
         //update the frames
@@ -62,18 +63,19 @@ public class EnemyBahaviour : MonoBehaviour
         }
 
         //update the movement taking into account delta time
-        Vector2 movement = Vector2.zero;
+        float movement = 0.0f;
         switch (axis)
         {
             case EnemyMovementAxis.Horizontal:
-                movement = new Vector2(speed * (direction == EnemyMovementDirection.Right ? 1.0f : -1.0f), 0);
+                movement = direction == EnemyMovementDirection.Right ? 1.0f : -1.0f;
+                rb.linearVelocity = new Vector2((movement * speed), rb.linearVelocity.y);
                 break;
             case EnemyMovementAxis.Vertical:
-                movement = new Vector2(speed * (direction == EnemyMovementDirection.Up ? 1.0f : -1.0f), 0);
+                movement = direction == EnemyMovementDirection.Up ? 1.0f : -1.0f;
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, (movement * speed));
                 break;
         }
 
-        rb.MovePosition(rb.position + movement * Time.deltaTime);
 
         // check for min and max and reverse direction
         if (axis == EnemyMovementAxis.Horizontal)
@@ -125,7 +127,8 @@ public class EnemyBahaviour : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //Destroy(other.gameObject);
+            Destroy(other.gameObject);
+            death?.Invoke();
         }
     }
 }

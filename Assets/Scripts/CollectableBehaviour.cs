@@ -8,9 +8,11 @@ public class CollectableBehaviour : MonoBehaviour
 
     [SerializeField]
     private float animationSpeed = 0.2f;
-
     private int currentFrame = 0;
     private float lastUpdate;
+
+    public delegate void OnCollected();
+    public static event OnCollected collected;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -36,6 +38,7 @@ public class CollectableBehaviour : MonoBehaviour
         if (!other.CompareTag("Player")) return;
         {
             Destroy(gameObject);
+            collected?.Invoke();
         }
     }   
 }

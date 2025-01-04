@@ -11,6 +11,7 @@ TagManager:
   - Wall
   - ConveyorRight
   - ConveyorLeft
+  - Enemy
   layers:
   - Default
   - TransparentFX
